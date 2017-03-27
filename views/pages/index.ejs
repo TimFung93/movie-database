@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/styles.css">        
+    </head>
+
+    <body>
+        <div class="container">
+            <h1 class="text-center">Movie Database</h1>
+            <form>
+                <input id="search" type="text" placeholder="Search Movie"> 
+                <input id="search-btn" type="submit" value="Submit">
+            </form>
+             <% for (let i = 0; i < val.length; i++) { %> 
+
+            <a class="movie-link" href= 'movie/<%= val[i].id %>'>
+            <div class="media movie-list-item">
+                <div class="media-left">
+                    <div class="poster-container">
+                        <img class="media-object movie-poster" src= 'https://image.tmdb.org/t/p/w500/<%=val[i].poster_path %>'>
+
+                    </div>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading">
+                    
+                     
+                      <h2>  <%= val[i].original_title %> </h2>
+                    
+                     <span class="badge">
+               
+                       <%= val[i].popularity %> </span>
+                                          
+                    </h4>
+                    <div>
+                         <p> <%= val[i].overview %> </p>
+                    </div>
+                    <div class="released-date">
+                        Released: <strong> <%= val[i].release_date %> </strong>
+                    </div>
+                </div>
+            </div>
+            </a>
+            
+            <% /*  ----------------------------------------------
+            -------------------------------------------------- */ %>
+            <% } %>
+        </div>
+       
+         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="/js/app.js"></script>
+        
+       
+    </body>
+</html>
+
