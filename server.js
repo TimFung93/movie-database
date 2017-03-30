@@ -1,12 +1,21 @@
 
 // initialize Express in project
 const express                       = require('express');
-const app                           = express();
+
+
+const http                          = require('http');
+const https                         = require('https');
 const request                       = require('request');
 
 
 
-const PORT = 8000;
+
+
+
+const app                           = express();
+
+
+const PORT = 8080;
 
 
 app.set('view engine' , 'ejs');
@@ -15,26 +24,23 @@ app.set('view engine' , 'ejs');
 
 const API = 'a1990a3ec9d6f17218d529f41e6802ed&language=en-US'
 
+const url = 'https://api.themoviedb.org/3/movie/popular?api_key='
 
 function getMovieInfo(url, cb) { // function takes in 2 params url and callback
   request(url, (err,res,body) => {
       if (!err && res.statusCode === 200) {
           let parseStr = JSON.parse(body)
           let results;
-
+  
           if (parseStr.results) {
-            results = parseStr.results
+              results = parseStr.results
           } else {
             results = parseStr
-              if (parseStr.results) {
-                  results = parseStr.results
-              } else {
-                results = parseStr
-              }
-
-          cb(err, results);
-          return results
           }
+            
+          cb(err, results);
+          
+        return results
       }
   })
 
@@ -43,7 +49,7 @@ function getMovieInfo(url, cb) { // function takes in 2 params url and callback
 
 
 
-app.get('/', (req , res) => {
+app.get('/', (req, res) => {
       //console.log(req)
       const url = "https://api.themoviedb.org/3/movie/popular?api_key=" + API
        getMovieInfo(url, function(err, results) {
@@ -57,7 +63,8 @@ app.get('/', (req , res) => {
             }
       })
 
-})
+});
+
 
 
 
